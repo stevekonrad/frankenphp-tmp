@@ -1,10 +1,7 @@
 ```bash
 docker build -t frankentest .
-mkdir app
-docker run --rm -it -v`pwd`:/app --user=root frankentest bash
-composer create-project symfony/skeleton:"7.2.x" app # will fail due to missing runtime
-cd app/
-composer require runtime/frankenphp-symfony
+docker run --rm -it -v`pwd`/app:/app --user=root frankentest bash
+composer install # will fail due to missing runtime
 exit
 docker run --rm -it -v`pwd`/app:/app --user=`id -u` frankentest # SIGSEGV
 ```
